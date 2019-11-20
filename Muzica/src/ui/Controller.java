@@ -21,6 +21,7 @@ import service.Service;
 //import javax.swing.text.TableView;
 import java.util.Comparator;
 import java.util.List;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
@@ -43,7 +44,7 @@ public class Controller implements Observer<MuzicaEvent>{
     @FXML private ComboBox<String> comboBoxVerdict;
     @FXML private ComboBox<String> comboBoxRecom;
 
-    @FXML private TextField muzica_artistTxt, muzica_albumTxt, muzica_melodiiTxt;
+    @FXML private TextField muzica_artistTxt, muzica_albumTxt, muzica_melodiiTxt,cautareArtist;
 
     private void loadData() throws Exception {
         modelMuz = FXCollections.observableList(StreamSupport.stream(service.allMusic().spliterator(), false).collect(Collectors.toList()));
@@ -131,6 +132,18 @@ public class Controller implements Observer<MuzicaEvent>{
                 alert.show();
             }
         }
+    }
+
+    public void filtrareArtist() throws Exception {
+        Predicate<Muzica> m = n ->{
+            try {
+                return service.findMuzica(n.getId()).getArtist().toLowerCase().contains(cautareArtist.getText().toLowerCase());
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+            return false;
+        };
+        modelMuz.setAll(service.allMusic().stream().filter(m).collect(Collectors.toList()));
     }
     
     @Override

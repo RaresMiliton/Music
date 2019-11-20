@@ -64,9 +64,10 @@ public class Service implements Observable<MuzicaEvent> {
         Iterable<Muzica> it= this.repoMuz.findAll();
         ArrayList<Muzica> arr = new ArrayList<>();
         it.forEach(arr::add);
-        /*if(arr.size()==0){
-            throw new ServiceException("Lista goala");
-        }*/
         return arr;
+    }
+
+    public Muzica findMuzica(String id) throws Exception{
+        return repoMuz.findOne(id);
     }
 }

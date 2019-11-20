@@ -95,6 +95,16 @@
                   <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                </columnResizePolicy>
             </TableView>
+            <Label layoutX="1181.0" layoutY="60.0" text="Cautare Artist">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <TextField fx:id="cautareArtist" layoutX="1114.0" layoutY="102.0" onKeyTyped="#filtrareArtist" prefHeight="49.0" prefWidth="252.0">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </TextField>
          </children>
       </AnchorPane>
    </center>
